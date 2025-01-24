@@ -18,6 +18,10 @@ public class Path {
         return instructions;
     }
 
+    public void clearInstructions() {
+        instructions.clear();
+    }
+
     @Override
     public String toString() {
         return String.join(" ", instructions);

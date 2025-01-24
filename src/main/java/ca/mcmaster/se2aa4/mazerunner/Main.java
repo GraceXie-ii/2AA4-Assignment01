@@ -1,10 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-//import java.io.File;
 import java.io.FileReader;
-//import java.util.logging.ConsoleHandler;
-//import java.util.logging.LogRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
@@ -46,9 +43,9 @@ public class Main {
                 if (explorer.explore()) {
                     logger.info("PATH FOUND: {}", explorer.getPath());
                 } else {
-                    logger.info("PATH NOT FOUND\n");
+                    logger.info("PATH NOT FOUND");
                 }
-                logger.info("** End of MazeRunner\n");
+                logger.info("\n** End of MazeRunner\n");
 
                 reader.close();
             } else {

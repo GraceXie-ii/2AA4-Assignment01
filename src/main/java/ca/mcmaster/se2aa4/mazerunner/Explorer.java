@@ -14,18 +14,24 @@ public class Explorer {
     }
 
     public boolean explore() {
-        while (!position.equals(maze.getExit())) {
-            Position nextPosition = position.move(direction);
+        while(true){
+            Position nexPosition = position.move(direction);
 
-            if (isValidPosition(nextPosition)) {
-                position = nextPosition;
+            if (nexPosition.getX() == maze.getExit().getX() && nexPosition.getY() == maze.getExit().getY()) {
+                path.addInstructions("F");
+                position = nexPosition;
+                return true;
+            }
+
+            if (isValidPosition(nexPosition)) {
+                position = nexPosition;
                 path.addInstructions("F");
             } else {
-                // If we hit a wall, stop exploration for now
+                path.addInstructions("Cannot move forward from: " + position);
                 return false;
             }
         }
-        return true;
+       
     }
 
     public void turnLeft() {
@@ -47,4 +53,10 @@ public class Explorer {
     public Path getPath() {
         return path;
     }
+
+    public void reset() {
+        this.position = maze.getEntry();
+        this.path.clearInstructions();
+    }
+
 }

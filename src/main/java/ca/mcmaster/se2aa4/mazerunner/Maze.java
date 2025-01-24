@@ -24,7 +24,7 @@ public class Maze {
             String line = lines.get(i);
             for(int j = 0; j < cols; j++){
                 grid[i][j] = line.charAt(j);
-                if(grid[i][j] == ' '){
+                if(grid[i][j] == ' ' && j == 0){
                     entry = new Position(i, j);
                 }
                 if(j == cols - 1 && grid[i][j] == ' '){
