@@ -25,6 +25,10 @@ public class Main {
             if (cmd.hasOption("i")) {
                 String inputFile = cmd.getOptionValue("i");
                 logger.info("**** Reading the maze from file" + inputFile + "\n");
+                
+                Maze maze = new Maze(inputFile);                
+                Explorer explorer = new Explorer(maze);
+
                 BufferedReader reader = new BufferedReader(new FileReader(inputFile));
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -37,6 +41,15 @@ public class Main {
                     }
                     logger.info(System.lineSeparator());
                 }
+
+                logger.info("**** Computing path\n");
+                if (explorer.explore()) {
+                    logger.info("PATH FOUND: {}", explorer.getPath());
+                } else {
+                    logger.info("PATH NOT FOUND\n");
+                }
+                logger.info("** End of MazeRunner\n");
+
                 reader.close();
             } else {
                 logger.error("Input file not provided. Use -i flag to specify the input file. \n");
@@ -44,8 +57,5 @@ public class Main {
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\ \n");
         }
-        logger.info("**** Computing path\n");
-        logger.info("PATH NOT COMPUTED\n");
-        logger.info("** End of MazeRunner\n");
     }
 }

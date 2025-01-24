@@ -1,17 +1,25 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Path {
-    public String findPath(Maze maze){
-        String path = "";
-        return path;
+    private List<String> instructions;
+
+    public Path() {
+        this.instructions = new ArrayList<>();
     }
 
-    public String factorizePath(String canonicalPath){
-        String realPath = "";
-        return realPath;
+    public void addInstructions(String instruction) {
+        instructions.add(instruction);
     }
 
-    public boolean validatePath(Maze maze, String path){
-        return true;
+    public List<String> getInstructions() {
+        return instructions;
+    }
+
+    @Override
+    public String toString() {
+        return String.join(" ", instructions);
     }
 }

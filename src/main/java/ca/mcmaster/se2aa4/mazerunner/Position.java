@@ -16,7 +16,18 @@ public class Position {
         return y;
     }
 
-    public void move(Direction direction){
-        //Change position based on if moved
+    public Position move(Direction direction) {
+        switch (direction.getCurrentDirection()) {
+            case "NORTH":
+                return new Position(x- 1, y);
+            case "SOUTH":
+                return new Position(x + 1, y);
+            case "EAST":
+                return new Position(x, y + 1);
+            case "WEST":
+                return new Position(x, y - 1);
+            default:
+                throw new IllegalArgumentException("Invalid direction");
+        }
     }
 }
