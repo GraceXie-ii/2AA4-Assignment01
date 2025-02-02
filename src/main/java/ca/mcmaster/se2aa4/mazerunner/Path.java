@@ -22,7 +22,46 @@ public class Path {
         instructions.clear();
     }
 
-    public String pathString() {
-        return String.join(" ", instructions);
+    public String canonicalPath(){
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 1; i < instructions.size(); i++) {
+            char c = instructions.get(i).charAt(0);
+            if (sb.length() == 0 || sb.charAt(sb.length() - 1) == c) {
+                sb.append(c);
+            } else {
+                sb.append(' ');
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
+
+    }
+
+    public String formatPath() {
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+
+        for (int i = 1; i < instructions.size(); i++) {
+            if (instructions.get(i).equals(instructions.get(i - 1))) {
+                count++;
+            } else {
+                if (count > 1) {
+                    sb.append(count).append(instructions.get(i - 1)).append(' ');
+                } else {
+                    sb.append(instructions.get(i - 1)).append(' ');
+                }
+                count = 1;
+            }
+        }
+
+        if (count > 1) {
+            sb.append(count).append(instructions.get(instructions.size() - 1));
+        } else {
+            sb.append(instructions.get(instructions.size() - 1));
+        }
+
+        return sb.toString().trim();
     }
 }
