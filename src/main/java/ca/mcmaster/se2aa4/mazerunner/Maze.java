@@ -34,7 +34,9 @@ public class Maze {
         }
     }
 
-    public boolean isPath(int x, int y) {
+    public boolean isPath(Position position) {
+        int x = position.getX();
+        int y = position.getY();
         return x >= 0 && y >= 0 && x < grid.length && y < grid[0].length && grid[x][y] != '#';
     }
 

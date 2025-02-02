@@ -5,34 +5,32 @@ public class RightHandExplorer implements Explorer {
 
     @Override
     public boolean explore(Maze maze) {
-        System.out.println("Exploring maze using right hand rule");
-
-        Position currentPosition = maze.getEntry();
-        Direction currentDirection = new Direction("EAST");
-        System.out.println("Current position: " + currentPosition.getX() + " " + currentPosition.getY());
-
-        while (currentPosition.getX() != maze.getExit().getX() && currentPosition.getY() != maze.getExit().getY()) {
-            
-            Direction rightDirection = currentDirection;
+       Position currentPosition = maze.getEntry();
+       Direction currentDirection = new Direction("EAST");
+       
+       while (!(currentPosition.getX() == maze.getExit().getX() && currentPosition.getY() == maze.getExit().getY()))  {
+            Direction rightDirection = new Direction(currentDirection.getCurrentDirection());
             rightDirection.turnRight();
             Position rightPosition = currentPosition.move(rightDirection);
-            if (maze.isPath(rightPosition.getX(), rightPosition.getY())) {
+            
+            if (maze.isPath(rightPosition) && !rightPosition.equals(currentPosition)) {
                 currentDirection.turnRight();
                 path.addInstructions("R");
-                currentPosition = currentPosition.move(currentDirection);
+                currentPosition = rightPosition;
                 path.addInstructions("F");
             } else {
                 Position forwardPosition = currentPosition.move(currentDirection);
-                Direction leftDirection = currentDirection;
-                rightDirection.turnLeft();
+                Direction leftDirection = new Direction(currentDirection.getCurrentDirection());
+                leftDirection.turnLeft();
                 Position leftPosition = currentPosition.move(leftDirection);
-                if (maze.isPath(forwardPosition.getX(), forwardPosition.getY())) {
-                    currentPosition = currentPosition.move(currentDirection);
+                
+                if (maze.isPath(forwardPosition) && !forwardPosition.equals(currentPosition)) {
+                    currentPosition = forwardPosition;
                     path.addInstructions("F");
-                } else if (maze.isPath(leftPosition.getX(), leftPosition.getY())) {
+                } else if (maze.isPath(leftPosition) && !leftPosition.equals(currentPosition)) {
                     currentDirection.turnLeft();
                     path.addInstructions("L");
-                    currentPosition = currentPosition.move(currentDirection);
+                    currentPosition = leftPosition;
                     path.addInstructions("F");
                 } else {
                     currentDirection.turnRight();
@@ -41,8 +39,8 @@ public class RightHandExplorer implements Explorer {
                     path.addInstructions("R");
                 }
             }
-        }
-        return true;
+        }     
+       return true;
     }
 
     public Path getPath() {

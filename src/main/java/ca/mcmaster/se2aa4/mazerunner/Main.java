@@ -41,7 +41,7 @@ public class Main {
 
                 logger.info("**** Computing path\n");
                 if (explorer.explore(maze)) {
-                    logger.info("PATH FOUND: {}", explorer.getPath());
+                    logger.info("PATH FOUND: {}", explorer.getPath().pathString());
                 } else {
                     logger.info("PATH NOT FOUND");
                 }

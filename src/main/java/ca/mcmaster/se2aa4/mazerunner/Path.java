@@ -22,8 +22,7 @@ public class Path {
         instructions.clear();
     }
 
-    @Override
-    public String toString() {
+    public String pathString() {
         return String.join(" ", instructions);
     }
 }
