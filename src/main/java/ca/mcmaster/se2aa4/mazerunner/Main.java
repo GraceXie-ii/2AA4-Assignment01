@@ -24,7 +24,7 @@ public class Main {
                 logger.info("**** Reading the maze from file" + inputFile + "\n");
                 
                 Maze maze = new Maze(inputFile);                
-                Explorer explorer = new Explorer(maze);
+                Explorer explorer = new RightHandExplorer();
 
                 BufferedReader reader = new BufferedReader(new FileReader(inputFile));
                 String line;
@@ -40,7 +40,7 @@ public class Main {
                 }
 
                 logger.info("**** Computing path\n");
-                if (explorer.explore()) {
+                if (explorer.explore(maze)) {
                     logger.info("PATH FOUND: {}", explorer.getPath());
                 } else {
                     logger.info("PATH NOT FOUND");
