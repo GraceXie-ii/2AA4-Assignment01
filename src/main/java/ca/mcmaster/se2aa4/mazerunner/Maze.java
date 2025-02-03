@@ -9,18 +9,18 @@ public class Maze {
     private char[][] grid;
     private Position entry, exit;
 
-    public Maze(String filePath) throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(filePath));
+    public Maze(String filePath) throws IOException{ //Constructor for the maze, IOException is thrown if the file is not found
+        List<String> lines = Files.readAllLines(Paths.get(filePath)); //Read the lines of the file
         if (lines.isEmpty()) {
             throw new IllegalArgumentException("Maze file is empty.");
         }
 
-        int rows = lines.size();
+        int rows = lines.size(); //Get the number of rows and columns in the maze
         int cols = lines.get(0).length();
 
-        grid = new char[rows][cols];
+        grid = new char[rows][cols]; //Create a 2D array to represent the maze
 
-        for(int i = 0; i < rows; i++){
+        for(int i = 0; i < rows; i++){ //Fill the 2D array with the characters from the file
             String line = lines.get(i);
             for(int j = 0; j < cols; j++){
                 grid[i][j] = line.charAt(j);
@@ -34,17 +34,17 @@ public class Maze {
         }
     }
 
-    public boolean isPath(Position position) {
+    public boolean isPath(Position position) { //Method to check if a position is empty
         int x = position.getX();
         int y = position.getY();
         return x >= 0 && y >= 0 && x < grid.length && y < grid[0].length && grid[x][y] != '#';
     }
 
-    public char[][] getGrid() {
+    public char[][] getGrid() { //Method to get the grid of the maze
         return grid;
     }
 
-    public Position getEntry(){
+    public Position getEntry(){ //Method to get the entry and exit positions of the maze
         return entry;
     }
 
