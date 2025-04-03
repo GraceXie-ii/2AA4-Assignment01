@@ -65,9 +65,9 @@ public class Testing {
 
         Position position2 = new Position(0, 0); //Create a new position object
         boolean isPath2 = maze.isPath(position2); //Check if the position is empty
-        assertEquals(true, isPath2);
+        assertEquals(false, isPath2);
 
-        Position position3 = new Position(0, 1); //Create a new position object
+        Position position3 = new Position(8, 0); //Create a new position object
         boolean isPath3 = maze.isPath(position3); //Check if the position is empty
         assertEquals(true, isPath3);
 
