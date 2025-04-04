@@ -8,6 +8,10 @@ public class Position { //Class to represent the position of the explorer
         this.y = y;
     }
 
+    public Position getPosition(){
+        return new Position(x, y); //Return a new position object with the same coordinates
+    }
+
     public int getX(){
         return x;
     }
@@ -17,17 +21,17 @@ public class Position { //Class to represent the position of the explorer
     }
 
     public Position move(Direction direction) { //Method to move the explorer in a given direction
-        switch (direction.getCurrentDirection()) { //Switch statement to determine the direction
-            case "NORTH": //If the direction is north, move the explorer up
-                return new Position(x- 1, y);
-            case "SOUTH": //If the direction is south, move the explorer down
-                return new Position(x + 1, y);
-            case "EAST": //If the direction is east, move the explorer right
-                return new Position(x, y + 1);
-            case "WEST": //If the direction is west, move the explorer left
-                return new Position(x, y - 1);
-            default:
-                throw new IllegalArgumentException("Invalid direction");
+        String relevantDirection = direction.getCurrentDirection(); //Get the current direction of the explorer
+        if(relevantDirection.equals("NORTH")){ //If the direction is north, move the explorer up
+            return new Position(x - 1, y);
+        } else if(relevantDirection.equals("SOUTH")){ //If the direction is south, move the explorer down
+            return new Position(x + 1, y);
+        } else if(relevantDirection.equals("EAST")){ //If the direction is east, move the explorer right
+            return new Position(x, y + 1);
+        } else if(relevantDirection.equals("WEST")){ //If the direction is west, move the explorer left
+            return new Position(x, y - 1);
+        } else {
+            throw new IllegalArgumentException("Invalid direction"); //Throw an exception if the direction is invalid
         }
     }
 }

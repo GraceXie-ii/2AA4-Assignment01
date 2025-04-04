@@ -9,36 +9,26 @@ public class Direction {
     }
 
     public void turnLeft(){ //Method to turn the explorer left, updates the current direction
-        switch(currentDirection){
-            case NORTH:
-                currentDirection = DirectionEnum.WEST;
-                break;
-            case EAST:
-                currentDirection = DirectionEnum.NORTH;
-                break;
-            case SOUTH:
-                currentDirection = DirectionEnum.EAST;
-                break;
-            case WEST:
-                currentDirection = DirectionEnum.SOUTH;
-                break;
+        if(currentDirection == DirectionEnum.NORTH) { //If the current direction is north, turn left to west
+            currentDirection = DirectionEnum.WEST;
+        } else if (currentDirection == DirectionEnum.EAST) { //If the current direction is east, turn left to north
+            currentDirection = DirectionEnum.NORTH;
+        } else if (currentDirection == DirectionEnum.SOUTH) { //If the current direction is south, turn left to east
+            currentDirection = DirectionEnum.EAST;
+        } else if (currentDirection == DirectionEnum.WEST) { //If the current direction is west, turn left to south
+            currentDirection = DirectionEnum.SOUTH;
         }
     }
 
     public void turnRight(){ //Method to turn the explorer right, updates the current direction
-        switch(currentDirection){
-            case NORTH:
-                currentDirection = DirectionEnum.EAST;
-                break;
-            case EAST:
-                currentDirection = DirectionEnum.SOUTH;
-                break;
-            case SOUTH:
-                currentDirection = DirectionEnum.WEST;
-                break;
-            case WEST:
-                currentDirection = DirectionEnum.NORTH;
-                break;
+        if(currentDirection == DirectionEnum.NORTH) { //If the current direction is north, turn right to east
+            currentDirection = DirectionEnum.EAST;
+        } else if (currentDirection == DirectionEnum.EAST) { //If the current direction is east, turn right to south
+            currentDirection = DirectionEnum.SOUTH;
+        } else if (currentDirection == DirectionEnum.SOUTH) { //If the current direction is south, turn right to west
+            currentDirection = DirectionEnum.WEST;
+        } else if (currentDirection == DirectionEnum.WEST) { //If the current direction is west, turn right to north
+            currentDirection = DirectionEnum.NORTH;
         }
     }
 

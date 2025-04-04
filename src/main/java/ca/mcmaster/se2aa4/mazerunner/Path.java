@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Path {
     private List<String> instructions;
+    private Position currentPosition;
+    private Direction currentDirection;
 
     public Path() { //Constructor to initialize the list of instructions
         this.instructions = new ArrayList<>();
@@ -57,5 +59,21 @@ public class Path {
         }
 
         return sb.toString().trim();
+    }
+
+    public void updatePosition(Position position) { // Update the current position
+        this.currentPosition = position;
+    }
+
+    public Position getCurrentPosition() { // Get the current position
+        return currentPosition;
+    }
+
+    public void setCurrentDirection(Direction direction) { // Set the current direction
+        this.currentDirection = direction;
+    }
+
+    public Direction getCurrentDirection() { // Get the current direction
+        return currentDirection;
     }
 }

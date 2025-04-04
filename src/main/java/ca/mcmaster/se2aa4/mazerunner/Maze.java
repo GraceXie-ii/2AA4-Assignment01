@@ -40,6 +40,10 @@ public class Maze {
         return x >= 0 && y >= 0 && x < grid.length && y < grid[0].length && grid[x][y] != '#';
     }
 
+    public boolean isValidMove(Position position) { // Method to check if a move is valid
+        return isPath(position);
+    }
+
     public char[][] getGrid() { //Method to get the grid of the maze
         return grid;
     }

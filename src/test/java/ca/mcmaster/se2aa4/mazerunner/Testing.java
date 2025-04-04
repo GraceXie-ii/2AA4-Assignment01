@@ -3,10 +3,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
+import ca.mcmaster.se2aa4.mazerunner.Command.*;
 
 public class Testing {
-    private Explorer explorer = new RightHandExplorer();
     private Maze maze;
+    private Explorer explorer = new RightHandExplorer();
 
     public Testing(){
         try {
@@ -52,7 +53,7 @@ public class Testing {
     //Test 5: check -i flag and -p flag
     @Test
     public void testFlags(){
-        String[] args = {"-i", "./examples/small.maz.txt", "=p", "F R F 2R 2F R 2F R 2F 2R 4F R 2F R 4F 2R 2F R 4F R 2F R 2F 2R 2F L 2F L 4F R 2F R 2F 2R 4F R 2F R 2F 2R 2F R 2F R 4F R 2F L 2F R 2F L F"};
+        String[] args = {"-i", "./examples/small.maz.txt", "-p", "F R F 2R 2F R 2F R 2F 2R 4F R 2F R 4F 2R 2F R 4F R 2F R 2F 2R 2F L 2F L 4F R 2F R 2F 2R 4F R 2F R 2F 2R 2F R 2F R 4F R 2F L 2F R 2F L F"};
         Main.main(args); //Run the main method with the args
     }
 
