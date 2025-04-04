@@ -24,8 +24,8 @@ public class RightHandExplorer implements Explorer {
 
     @Override
     public boolean explore(Maze maze) { //Method to explore the maze 
-        Position currentPosition = maze.getEntry();
-        Direction currentDirection = new Direction("NORTH"); //Set the initial direction to north
+        Position currentPosition = maze.getEntry(); 
+        Direction currentDirection = new Direction("EAST");
 
         while (!(currentPosition.getX() == maze.getExit().getX() && currentPosition.getY() == maze.getExit().getY()))  { //While the explorer has not reached the exit
             Direction rightDirection = new Direction(currentDirection.getCurrentDirection());  //Create a new direction to the right of the current direction
@@ -44,7 +44,7 @@ public class RightHandExplorer implements Explorer {
                 Position leftPosition = currentPosition.move(leftDirection);
                 
                 if (maze.isPath(forwardPosition)) { //If the forward position is empty, move forward
-                    executor.executeCommand(moveForwardCommand);
+                    currentPosition = forwardPosition;
                     path.addInstructions("F");
                 } else if (maze.isPath(leftPosition)) { //If the forward position is not empty but the left position is empty, turn left and move forward
                     currentDirection.turnLeft();

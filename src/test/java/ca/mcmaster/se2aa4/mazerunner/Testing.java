@@ -3,7 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
-import ca.mcmaster.se2aa4.mazerunner.Command.*;
 
 public class Testing {
     private Maze maze;
