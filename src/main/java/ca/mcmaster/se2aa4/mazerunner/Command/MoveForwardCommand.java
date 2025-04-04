@@ -16,7 +16,6 @@ public class MoveForwardCommand implements Command { //Class to represent the mo
         this.maze = maze;
     }
 
-    @Override
     public void execute() { //Method to execute the move forward command
         Position currentPosition = explorer.getPath().getCurrentPosition(); //Get the current position of the explorer
         Direction direction = explorer.getPath().getCurrentDirection(); //Get the current direction of the explorer
@@ -27,5 +26,9 @@ public class MoveForwardCommand implements Command { //Class to represent the mo
         } else {
             System.out.println("Invalid move!"); //If the move is invalid, print an error message
         }
+    }
+
+    public Position getNewPosition() { //Method to get the new position of the explorer
+        return explorer.getPath().getCurrentPosition(); //Return the current position of the explorer
     }
 }

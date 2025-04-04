@@ -28,34 +28,39 @@ public class RightHandExplorer implements Explorer {
         Direction currentDirection = new Direction("EAST");
 
         while (!(currentPosition.getX() == maze.getExit().getX() && currentPosition.getY() == maze.getExit().getY()))  { //While the explorer has not reached the exit
+            executor.executeCommand(turnRightCommand); //Execute the move forward command
             Direction rightDirection = new Direction(currentDirection.getCurrentDirection());  //Create a new direction to the right of the current direction
-            rightDirection.turnRight();
             Position rightPosition = currentPosition.move(rightDirection);
             
             if (maze.isPath(rightPosition)) { //If the right position is empty, turn right and move forward
                 currentDirection.turnRight();
                 path.addInstructions("R");
-                currentPosition = rightPosition;
+                executor.executeCommand(moveForwardCommand); //Execute the move forward command
+                currentPosition = moveForwardCommand.getNewPosition();
+                currentDirection = rightDirection; //Update the current direction to the right direction
                 path.addInstructions("F");
             } else {
                 Position forwardPosition = currentPosition.move(currentDirection); //If the right position is not empty, move forward
-                Direction leftDirection = new Direction(currentDirection.getCurrentDirection());
-                leftDirection.turnLeft();
-                Position leftPosition = currentPosition.move(leftDirection);
                 
                 if (maze.isPath(forwardPosition)) { //If the forward position is empty, move forward
-                    currentPosition = forwardPosition;
+                    executor.executeCommand(moveForwardCommand);
+                    currentPosition = moveForwardCommand.getNewPosition();
                     path.addInstructions("F");
-                } else if (maze.isPath(leftPosition)) { //If the forward position is not empty but the left position is empty, turn left and move forward
-                    currentDirection.turnLeft();
-                    path.addInstructions("L");
-                    currentPosition = leftPosition;
-                    path.addInstructions("F");
-                } else { //If the forward and left positions are not empty, turn around and move forward
-                    currentDirection.turnRight();
-                    currentDirection.turnRight();
-                    path.addInstructions("R");
-                    path.addInstructions("R");
+                } else{
+                    executor.executeCommand(turnLeftCommand); //If the forward position is not empty, turn left and move forward
+                    Direction leftDirection = new Direction(currentDirection.getCurrentDirection()); //Create a new direction to the left of the current direction
+                    Position leftPosition = currentPosition.move(leftDirection); //Get the left position
+                    if(maze.isPath(leftPosition)){
+                        path.addInstructions("L");
+                        executor.executeCommand(moveForwardCommand); //Execute the move forward command
+                        currentPosition = moveForwardCommand.getNewPosition();
+                        currentDirection = leftDirection;
+                        path.addInstructions("F");
+                    }else{
+                        executor.executeCommand(turnRightCommand);
+                        executor.executeCommand(turnRightCommand); //If the left position is not empty, turn right twice to go back to the original direction
+                        path.addInstructions("RR");
+                    }
                 }
             }
         }     
