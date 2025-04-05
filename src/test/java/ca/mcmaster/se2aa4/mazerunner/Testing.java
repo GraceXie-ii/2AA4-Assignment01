@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 public class Testing {
     private Maze maze;
     private Explorer explorer;
-    private Path path;
 
     public Testing(){
         try {
@@ -18,6 +17,7 @@ public class Testing {
         }
     }
 
+    // Test 0: to check if the explorer is initialized correctly
     @Test
     public void testExplorerInitialization() {
        assertEquals(maze.getEntry(), explorer.getPath().getCurrentPosition());
@@ -46,7 +46,7 @@ public class Testing {
     public void testCanonicalPath() {
         explorer.explore();
         String expectedCanonicalPath = "F R F RR FF R FF R FF RR FFFF R FF R FFFF RR FF R FFFF R FF R FF RR FF L FF L FFFF R FF R FF RR FFFF R FF R FF RR FF R FF R FFFF R FF L FF R FF L F";
-        assertEquals(expectedCanonicalPath, explorer.getPath().canonicalPath()); 
+        assertEquals(expectedCanonicalPath, ((RightHandExplorer) explorer).getCanonicalPath()); 
     }
 
     //Test 4: Check if Formatted path is correct
@@ -54,7 +54,7 @@ public class Testing {
     public void testFormattedPath() {
         explorer.explore();
         String expectedFormattedPath = "F R F 2R 2F R 2F R 2F 2R 4F R 2F R 4F 2R 2F R 4F R 2F R 2F 2R 2F L 2F L 4F R 2F R 2F 2R 4F R 2F R 2F 2R 2F R 2F R 4F R 2F L 2F R 2F L F";
-        assertEquals(expectedFormattedPath, explorer.getPath().formatPath());
+        assertEquals(expectedFormattedPath, ((RightHandExplorer) explorer).getFactorizedPath());
     }
 
     //Test 5: check -i flag and -p flag

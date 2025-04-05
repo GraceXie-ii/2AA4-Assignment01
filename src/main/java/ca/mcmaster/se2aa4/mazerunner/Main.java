@@ -61,7 +61,7 @@ public class Main {
                 }else{ //If the -p flag is not used then the program will compute the path
                     logger.info("**** Computing path\n");
                     if (explorer.explore()) {
-                        logger.info("PATH FOUND: {}", ((Path) explorer.getPath()).canonicalPath());
+                        logger.info("PATH FOUND: {}", ((RightHandExplorer) explorer).getCanonicalPath());
                         System.out.print(((Path) explorer.getPath()).formatPath()); //OUtput the formatted path
                     } else {
                         logger.info("PATH NOT FOUND");
