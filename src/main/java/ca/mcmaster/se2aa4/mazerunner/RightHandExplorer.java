@@ -117,8 +117,8 @@ public class RightHandExplorer implements Explorer {
         return recorder.getCanonicalPath();
     }
 
-    public String getFormattedPath() {
-        return recorder.getFormattedPath();
+    public String getFactorizedPath() {
+        return recorder.getFactorizedPath();
     }
 
     @Override

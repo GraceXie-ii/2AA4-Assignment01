@@ -31,7 +31,7 @@ public class Recorder implements Observer{
         return canonicalPath.toString().trim();
     }
 
-    public String getFormattedPath(){
+    public String getFactorizedPath(){
         String[] actions = movementLog.split(" ");
         StringBuilder formattedPath = new StringBuilder();
         int count = 1;

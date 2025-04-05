@@ -121,5 +121,4 @@ public class Testing {
         path.addInstructions("F"); //Add instructions to the path
         assertEquals("F", path.getInstructions().get(path.getInstructions().size() - 1)); //Check if the last instruction is correct
     }
-    
 }

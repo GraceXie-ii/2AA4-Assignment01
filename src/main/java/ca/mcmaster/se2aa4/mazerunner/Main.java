@@ -48,8 +48,8 @@ public class Main {
                     String userInput = cmd.getOptionValue("p");//Gets the value of the -p flag
 
                     if(explorer.explore()){ //Checks if the path is correct
-                        String formattedPath = ((Path) explorer.getPath()).formatPath(); //Gets the formatted path
-                        String canonPath = ((Path) explorer.getPath()).canonicalPath(); //Gets the canonical path
+                        String formattedPath = ((RightHandExplorer) explorer).getFactorizedPath(); //Gets the formatted path
+                        String canonPath = ((RightHandExplorer) explorer).getCanonicalPath(); //Gets the canonical path
                         if(userInput.equals(formattedPath) || userInput.equals(canonPath)){ //Allows the user to input the correct formatted path or canonical path
                             System.out.println("correct path");
                         }else{
