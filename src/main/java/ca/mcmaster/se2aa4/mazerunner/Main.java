@@ -29,7 +29,7 @@ public class Main {
                 logger.info("**** Reading the maze from file" + inputFile + "\n");
                 
                 Maze maze = new Maze(inputFile);//Construcs a new maze object and then an explorer object             
-                Explorer explorer = new RightHandExplorer();
+                Explorer explorer = new RightHandExplorer(maze);
 
                 BufferedReader reader = new BufferedReader(new FileReader(inputFile)); //Reads the maze from the input file
                 String line;
@@ -47,9 +47,9 @@ public class Main {
                 if(cmd.hasOption("p")){ //Checks if the -p flag is used
                     String userInput = cmd.getOptionValue("p");//Gets the value of the -p flag
 
-                    if(explorer.explore(maze)){ //Checks if the path is correct
-                        String formattedPath = explorer.getPath().formatPath(); //Gets the formatted path
-                        String canonPath = explorer.getPath().canonicalPath(); //Gets the canonical path
+                    if(explorer.explore()){ //Checks if the path is correct
+                        String formattedPath = ((Path) explorer.getPath()).formatPath(); //Gets the formatted path
+                        String canonPath = ((Path) explorer.getPath()).canonicalPath(); //Gets the canonical path
                         if(userInput.equals(formattedPath) || userInput.equals(canonPath)){ //Allows the user to input the correct formatted path or canonical path
                             System.out.println("correct path");
                         }else{
@@ -60,9 +60,9 @@ public class Main {
                     }
                 }else{ //If the -p flag is not used then the program will compute the path
                     logger.info("**** Computing path\n");
-                    if (explorer.explore(maze)) {
-                        logger.info("PATH FOUND: {}", explorer.getPath().canonicalPath());
-                        System.out.print(explorer.getPath().formatPath()); //OUtput the formatted path
+                    if (explorer.explore()) {
+                        logger.info("PATH FOUND: {}", ((Path) explorer.getPath()).canonicalPath());
+                        System.out.print(((Path) explorer.getPath()).formatPath()); //OUtput the formatted path
                     } else {
                         logger.info("PATH NOT FOUND");
                     }

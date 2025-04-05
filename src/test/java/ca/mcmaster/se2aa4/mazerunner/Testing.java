@@ -6,14 +6,22 @@ import org.junit.jupiter.api.Test;
 
 public class Testing {
     private Maze maze;
-    private Explorer explorer = new RightHandExplorer();
+    private Explorer explorer;
+    private Path path;
 
     public Testing(){
         try {
             maze = new Maze("./examples/small.maz.txt"); //Entry: (8, 0), Exit:(5, 10)
+            explorer = new RightHandExplorer(maze); // initialize the explorer with the maze
         } catch (Exception e) {
             System.out.println("Error initializing maze: " + e.getMessage());
         }
+    }
+
+    @Test
+    public void testExplorerInitialization() {
+       assertEquals(maze.getEntry(), explorer.getPath().getCurrentPosition());
+       assertEquals("EAST", explorer.getPath().getCurrentDirection().getCurrentDirection());
     }
 
     // Test 1: to check if the maze is initialized correctly
@@ -36,15 +44,15 @@ public class Testing {
     //Test 3: Check if Canonical path is correct
     @Test
     public void testCanonicalPath() {
-        explorer.explore(maze);
+        explorer.explore();
         String expectedCanonicalPath = "F R F RR FF R FF R FF RR FFFF R FF R FFFF RR FF R FFFF R FF R FF RR FF L FF L FFFF R FF R FF RR FFFF R FF R FF RR FF R FF R FFFF R FF L FF R FF L F";
-        assertEquals(expectedCanonicalPath, explorer.getPath().canonicalPath());
+        assertEquals(expectedCanonicalPath, explorer.getPath().canonicalPath()); 
     }
 
     //Test 4: Check if Formatted path is correct
     @Test
     public void testFormattedPath() {
-        explorer.explore(maze);
+        explorer.explore();
         String expectedFormattedPath = "F R F 2R 2F R 2F R 2F 2R 4F R 2F R 4F 2R 2F R 4F R 2F R 2F 2R 2F L 2F L 4F R 2F R 2F 2R 4F R 2F R 2F 2R 2F R 2F R 4F R 2F L 2F R 2F L F";
         assertEquals(expectedFormattedPath, explorer.getPath().formatPath());
     }
@@ -79,7 +87,7 @@ public class Testing {
     //Test 7: Check if explorer moves correctly
     @Test
     public void testExplorerMovement() {
-        explorer.explore(maze); //Explore the maze
+        explorer.explore(); //Explore the maze
         Position currentPosition = maze.getEntry(); //Get the entry position of the maze
         Direction currentDirection = new Direction("EAST"); //Create a new direction object
         Position newPosition = currentPosition.move(currentDirection); //Move the explorer in the current direction
@@ -90,7 +98,7 @@ public class Testing {
     //Test 8: Check if turnRight works correctly
     @Test
     public void testExplorerTurn() {
-        explorer.explore(maze); //Explore the maze
+        explorer.explore(); //Explore the maze
         Direction currentDirection = new Direction("EAST"); //Create a new direction object
         currentDirection.turnRight(); //Turn the explorer right
         assertEquals("SOUTH", currentDirection.getCurrentDirection()); //Check if the direction is correct
@@ -99,7 +107,7 @@ public class Testing {
     //Test 9: Check if turnLeft works correctly
     @Test
     public void testExplorerTurnLeft() {
-        explorer.explore(maze); //Explore the maze
+        explorer.explore(); //Explore the maze
         Direction currentDirection = new Direction("EAST"); //Create a new direction object
         currentDirection.turnLeft(); //Turn the explorer left
         assertEquals("NORTH", currentDirection.getCurrentDirection()); //Check if the direction is correct
@@ -108,8 +116,8 @@ public class Testing {
     //Test 10: Check if adding instructions works correctly
     @Test
     public void testAddInstructions(){
-        explorer.explore(maze); //Explore the maze
-        Path path = explorer.getPath(); //Get the path object
+        explorer.explore(); //Explore the maze
+        Path path = ((Path) explorer.getPath()); //Get the path object
         path.addInstructions("F"); //Add instructions to the path
         assertEquals("F", path.getInstructions().get(path.getInstructions().size() - 1)); //Check if the last instruction is correct
     }
