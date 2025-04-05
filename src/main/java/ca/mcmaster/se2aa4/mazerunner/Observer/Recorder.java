@@ -28,22 +28,22 @@ public class Recorder implements Observer{
         return sb.toString();
     }
 
-    public String getFactorizedPath(){
+    public String getFactorizedPath(){ // Method to format the path with counts of consecutive actions
         String[] actions = movementLog.split(" ");
-        StringBuilder formattedPath = new StringBuilder();
+        StringBuilder formattedPath = new StringBuilder(); // StringBuilder to build the formatted path
         int count = 1;
-        for (int i = 0; i < actions.length; i++) {
-            if (i < actions.length - 1 && actions[i].equals(actions[i + 1])) {
+        for (int i = 0; i < actions.length; i++) { // Loop through the list of actions
+            if (i < actions.length - 1 && actions[i].equals(actions[i + 1])) { // If the current action is the same as the next action, increment the count
                 count++;
             } else {
-                if (count > 1) {
+                if (count > 1) { // If the count is greater than 1, append the count and the action
                     formattedPath.append(count).append(actions[i]).append(" ");
                     count = 1;
                 } else {
-                    formattedPath.append(actions[i]).append(" ");
+                    formattedPath.append(actions[i]).append(" "); // If the count is not greater than 1, append the action
                 }
             }
         }
-        return formattedPath.toString().trim();
+        return formattedPath.toString().trim(); // Return the formatted path as a string
     }
 }
